@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사원 목록 페이지</title>
+<style>
+body{
+	background-color: lime;
+}
+h1 {
+	width: 1200px;
+	margin: 0 auto;
+	text-align: center;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: black;
+}
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 1200px;
+	margin: 0 auto;
+	color: black;
+	
+}
+
+td, th {
+	text-align: center;
+	padding: 8px;
+	border-radius: 15px;
+}
+
+th{
+background-color: #FFF612;
+}
+td{
+background-color: #FFFF90;
+}
+</style>
+</head>
+<body>
+	<!-- 사원목록 구현하기 -->
+	<h1>디엔비 코드 사원 목록</h1>
+	<table id="emp">
+		<tr>
+			<th>사원번호</th>
+			<th>사원이름</th>
+			<th>직책</th>
+			<th>입사날짜</th>
+			<th>급여</th>
+			<th>부서이름</th>
+			<th>부서위치</th>
+		</tr>
+	</table>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+	crossorigin="anonymous"></script>
+	
+<script type="text/javascript">
+	callMyAPI();
+	
+	function callMyAPI(){
+		$.ajax({
+			url : '/api/v1/emp1',
+			type : 'GET',
+			dataType : 'json',
+			success : function(response) {
+				for (var i = 0; i < response.length; i++) {
+					tr = $('<tr></tr>');
+					empno = $('<td>' + response[i].empno + '</td>');
+					ename = $('<td>' + response[i].ename + '</td>');
+					job = $('<td>' + response[i].job + '</td>');
+					hiredate = $('<td>' + response[i].hiredate + '</td>');
+					sal = $('<td>' + response[i].sal + '</td>');
+					dname = $('<td>' + response[i].dname + '</td>');
+					loc = $('<td>' + response[i].loc + '</td>');
+					tr.append(empno);
+					tr.append(ename);
+					tr.append(job);
+					tr.append(hiredate);
+					tr.append(sal);
+					tr.append(dname);
+					tr.append(loc);
+					$("#emp").append(tr);
+				}
+			}
+		});
+	}
+</script>
+</html>
