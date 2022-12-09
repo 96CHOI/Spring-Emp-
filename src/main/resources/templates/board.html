@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>디엔비코드 게시판</title>
+<style type="text/css">
+body{
+	background-color: black;
+	margin: 0;
+	padding: 0;
+    box-sizing: border-box;
+}
+h1 {
+	width: 1200px;
+	height: 130px;
+	margin: 0 auto;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+}
+.top{
+	width: 100%;
+	height: 60px;
+}
+.bt{
+	width: 1000px;
+	margin: 0 auto;
+	height: 30px;
+	display: flex;
+	justify-content: flex-end;
+}
+button{
+	width: 150px;
+}
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 1000px;
+	margin: 0 auto;
+	color: white;
+}
+
+td, th {
+	text-align: center;
+	border-radius: 20px;
+	padding: 8px;
+	color: white;
+}
+a{
+	font-weight: bold;
+	color: white;
+}
+
+th{
+background-color: #747474;
+}
+td{
+background-color: #A6A6A6;
+}
+tr:hover{
+	cursor:pointer;
+}
+button:hover{
+	cursor:pointer;
+}
+</style>
+</head>
+<body>
+	<h1>디엔비코드 게시판</h1>
+	<div class="top">
+		<div class="bt">
+			<button>게시물 작성</button>
+		</div>
+	</div>
+	<table id="board">
+		<tr>
+			<th>게시판 번호</th>
+			<th>게시판 제목</th>
+			<th>작성자</th>
+			<th>작성날짜</th>
+			<th>조회수</th>
+		</tr>
+	</table>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+	crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	callMyAPI();
+	
+	function callMyAPI(){
+		$.ajax({
+			url : '/api/v1/board',
+			type : 'GET',
+			dataType : 'json',
+			success : function(response) {
+				console.log(response)
+				for (var i = 0; i < response.length; i++) {
+					tr = $('<tr></tr>');
+					board_no = $('<td>' + response[i].board_no + '</td>');
+					title = $('<td><a href="#">' + response[i].title + '</a></td>');
+					writer = $('<td>' + response[i].writer + '</td>');
+					CREATE_at = $('<td>' + response[i].create_at + '</td>');
+					board_count = $('<td>' + response[i].board_count + '</td>');
+					tr.append(board_no);
+					tr.append(title);
+					tr.append(writer);
+					tr.append(CREATE_at);
+					tr.append(board_count);
+					$("#board").append(tr);
+				}
+			}
+		});
+	}
+</script>
+</html>

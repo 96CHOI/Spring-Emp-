@@ -7,4 +7,4 @@ spring:
     password: cyd68400
     
 mybatis:
-  mapper-locations: classpath:/sqlmap/sql.xml
+  mapper-locations: classpath:/sqlmap/sql_*.xml

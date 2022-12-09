@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dw.emp.service.BoardService;
 import com.dw.emp.service.EmpService;
+import com.dw.emp.vo.BoardVO;
 import com.dw.emp.vo.EmpVO;
 
 @RestController
@@ -19,10 +21,14 @@ public class EmpApiController {
 	@Autowired
 	EmpService empService;
 	
+	
+	
 	@GetMapping("/api/v1/emp1")
 	public List<EmpVO> callEmp() {
 		return empService.selectEmp();
 	}
+	
+	
 	
 	@GetMapping("/api/v1/emp1/{empno}")
 	public EmpVO callEmp(@PathVariable int empno) {
