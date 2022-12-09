@@ -3,17 +3,73 @@
 <mapper namespace="com.dw.emp.mapper.EmpMapper">
 
 	<select id="selectEmp" resultType="com.dw.emp.vo.EmpVO">
-		SELECT 
+		SELECT
+		 empno,
+		 ename,
+		 job,
+		 hiredate,
+		 sal,
+		 dname,
+		 loc
+		FROM emp AS e
+		INNER JOIN dept AS d
+		ON e.DEPTNO =
+		d.DEPTNO
+	</select>
+
+	<select id="selectEmpfindByEmpno" resultType="com.dw.emp.vo.EmpVO">
+		SELECT
+		 ename,
+		 ifnull(sal, 100) AS sal,
+		 ifnull(comm, 0) AS comm
+		FROM emp
+		WHERE empno = #{empno}
+	</select>
+	
+	<!-- 추가 -->
+	<insert id="insertEMP">
+		INSERT INTO emp
+		(
 			empno,
 			ename,
 			job,
 			hiredate,
 			sal,
-			dname,
-			loc	
-		FROM emp AS e
-		INNER JOIN dept AS d 
-		ON e.DEPTNO = d.DEPTNO
-	</select>
-
+			deptno
+		)
+		VALUES
+		(
+			#{empno},
+			#{ename},
+			#{job},
+			now(),
+			#{sal},
+			#{deptno}
+		)		
+	</insert>
+	
+	<!-- 삭제 -->
+	<delete id="deleteEmp">
+		DELETE FROM emp
+		WHERE empno = #{empno}
+	</delete>
+	
+	<!-- 수정하기 -->
+	<update id="updateEMP">
+		UPDATE emp
+		SET
+		sal = #{sal},
+		job = #{job}
+		WHERE empno = #{empno}
+	</update>
+	
+	
+	
 </mapper>
+
+
+
+
+
+
+
