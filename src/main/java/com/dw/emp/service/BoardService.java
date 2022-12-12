@@ -17,4 +17,19 @@ public class BoardService {
 	public List<BoardVO> selectBoard(){
 		return boardMapper.selectBoard();
 	}
+
+	public int insertBoard(BoardVO vo) {
+		return boardMapper.insertBoard(vo);
+	}
+	public BoardVO selectBoardFindByBoardNo(int boardNo) {
+		return boardMapper.selectBoardFindByBoardNo(boardNo);
+	}
+	
+	public int deleteBoard(int boardNo) {
+		return boardMapper.deleteBoard(boardNo);
+	}
+
+	public int updateBoard(BoardVO boardNo) {
+		return boardMapper.updateBoard(boardNo);
+	}
 }

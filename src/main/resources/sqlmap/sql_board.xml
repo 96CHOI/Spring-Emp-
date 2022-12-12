@@ -12,6 +12,44 @@
 		FROM board
 	</select>
 	
+	<insert id="insertBoard">
+		INSERT INTO board
+		(
+			title,
+			contents,
+			writer
+		)
+		VALUES
+		(
+			#{title},
+			#{contents},
+			#{writer}
+		)
+	</insert>
+	
+	<select id="selectBoardFindByBoardNo" resultType="com.dw.emp.vo.BoardVO">
+		SELECT
+			title,
+			contents,
+			writer
+		FROM board
+		WHERE board_no = #{board_no}
+	</select>
+	
+	<delete id="deleteBoard">
+		DELETE FROM board
+		WHERE board_no = #{board_no}
+	</delete>
+	
+	<update id="updateBoard">
+		UPDATE board
+		SET
+		 title = #{title},
+		 writer = #{writer},
+		 contents = #{contents}
+		WHERE board_no = #{board_no}
+	</update>
+	
 </mapper>
 
 

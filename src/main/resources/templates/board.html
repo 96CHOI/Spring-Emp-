@@ -62,6 +62,7 @@ background-color: #A6A6A6;
 tr:hover{
 	cursor:pointer;
 }
+
 button:hover{
 	cursor:pointer;
 }
@@ -71,7 +72,8 @@ button:hover{
 	<h1>디엔비코드 게시판</h1>
 	<div class="top">
 		<div class="bt">
-			<button>게시물 작성</button>
+			<button onclick="doWrite()">게시물 작성</button>
+			<button onclick="detailBoard()">게시물 수정</button>
 		</div>
 	</div>
 	<table id="board">
@@ -101,7 +103,7 @@ button:hover{
 				for (var i = 0; i < response.length; i++) {
 					tr = $('<tr></tr>');
 					board_no = $('<td>' + response[i].board_no + '</td>');
-					title = $('<td><a href="#">' + response[i].title + '</a></td>');
+					title = $('<td onclick="detailBoard('+ response[i].board_no +')"><a href="#">' + response[i].title + '</a></td>');
 					writer = $('<td>' + response[i].writer + '</td>');
 					CREATE_at = $('<td>' + response[i].create_at + '</td>');
 					board_count = $('<td>' + response[i].board_count + '</td>');
@@ -114,6 +116,14 @@ button:hover{
 				}
 			}
 		});
+	}
+	
+	function doWrite(){
+		location.href = '/write'
+	}
+	function detailBoard(boardNo){// 게시물 상세화면으로 이동
+		console.log(boardNo);
+		location.href = '/board/'+boardNo; //게시판 PK URL(Controller)에 전달
 	}
 </script>
 </html>
